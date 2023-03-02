@@ -1,5 +1,9 @@
 {% extends 'blog/base.html' %}
 
+{% load comment_tags %}
+
+{% load ratings %}
+
 {% block title %}
   {{object.title}}
 {% endblock %}
@@ -17,6 +21,7 @@
               <span class="badge badge-danger"style="font-size:14px;">ویژه</span>
             {% endif %}
             <time>{{object.jpublish}}</time>
+            <div>{% ratings object %}</div>
           </div>
         </div>
       </div>
@@ -39,6 +44,9 @@
             {{object.description|safe}}
           {% endif %}
 
+          {% render_comments object request %}
+          {% include_static_jquery %}
+          {% include_bootstrap %}
         </div>
       </div>
     </div>

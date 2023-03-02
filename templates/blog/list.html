@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load ratings %}
+
 {% block main %}
   <!-- Page Header -->
   <header class="masthead" style="background-image: url('{% static "blog/img/home-bg.jpg" %}')">
@@ -34,6 +36,7 @@
                   <span class="badge badge-danger"style="font-size:14px;">ویژه</span>
                 {% endif %}
               </h2>
+              <div>{% ratings article %}</div>
               <h3 class="post-subtitle">
                 {{article.description|striptags|truncatewords:30}}
               </h3>

@@ -5,6 +5,9 @@ from django.utils import timezone
 from django.utils.html import format_html
 from extensions.utils import jalali_convertor
 
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
+
 
 # My managers
 class ArticleManager(models.Manager):
@@ -50,6 +53,7 @@ class Article(models.Model):
     updated = models.DateTimeField(auto_now=True)
     is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, verbose_name='وضعیت')
+    comments = GenericRelation(Comment)
 
     class Meta:
         verbose_name = 'مقاله'

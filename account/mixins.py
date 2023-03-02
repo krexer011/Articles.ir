@@ -25,13 +25,11 @@ class FormValidMixin():
 
 class AuthorAccessMixin():
     def dispatch(self, request, pk, *args, **kwargs):
-        if request.user.is_authenticated:
-            if request.user.is_superuser or request.user.is_author:
-                return super().dispatch(request, *args, **kwargs)
-            else:
-                return redirect('account:profile')
+        article = get_object_or_404(Article, pk=pk)
+        if article.author == request.user and article.status in ['d', 'i'] or request.user.is_superuser:
+            return super().dispatch(request, *args, **kwargs)
         else:
-            return redirect('account:login')
+            raise Http404("You can not see this page")
 
 
 class SuperUserAccessMixin():
@@ -40,3 +38,14 @@ class SuperUserAccessMixin():
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404("You can not enter this page")
+        
+
+class AuthorsAccessMixin():
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.is_superuser or request.user.is_author:
+                return super().dispatch(request, *args, **kwargs)
+            else:
+                return redirect('account:profile')
+        else:
+            return redirect('login')
