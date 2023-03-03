@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article, Category
+from .models import Article, Category, IPAddress
 
 @admin.action(description='منتشر کردن مقالات انتخاب شده')
 def make_published(modeladmin, request, queryset):
@@ -43,3 +43,4 @@ class ArticleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(IPAddress)

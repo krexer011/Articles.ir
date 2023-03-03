@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_gravatar',
     'blog.apps.BlogConfig',
     'account.apps.AccountConfig',
+    'django.contrib.humanize',
     'extensions',
     'widget_tweaks',
     'crispy_forms',
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'blog.middleware.SaveIPAddressMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -131,10 +133,10 @@ USE_TZ = True
 import os
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'static'),
+#]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
